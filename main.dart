@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -35,7 +36,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   String _text = "Press the button to start speaking";  
   double _confidence = 1.0;
   String langId = 'en-US';
-  List<String> savedWords = [];
+  static late String savedWords;
   @override
   void initState(){
     super.initState();
@@ -116,14 +117,17 @@ class _SpeechScreenState extends State<SpeechScreen> {
       floatingActionButton: FloatingActionButton(
       onPressed: _listen,
       child : Icon(_isListening ? Icons.mic : Icons.mic_none),
+      
       ),
+      
       body: SingleChildScrollView(reverse: true,child: Container(
         padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
         child: Text(_text),
         ),
-      )
+      ),
+      
     );
-    print(savedWords);
+    
   }
 
 
@@ -148,11 +152,45 @@ class _SpeechScreenState extends State<SpeechScreen> {
       }
     } else {
       setState(() => _isListening = false);
-      savedWords.add(_text);
+       FlutterClipboard.copy(_text);
+       savedWords = _text;
       _speech.stop();
-
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const AssementRoute()));
+      
     }
   }
+
 }
 
+class AssementRoute extends StatelessWidget{
+    const AssementRoute({super.key});
+  
+    @override
 
+    Widget build(BuildContext context){
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Assesement'),
+          actions: [
+          
+            FloatingActionButton(
+              onPressed: () {
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => const SpeechScreen()));
+            },
+            child: Icon(Icons.arrow_back_ios_new),
+            ),
+            
+          ],
+
+        ),
+        body: Center(
+          child: Container(
+            margin: const EdgeInsets.all(10.0),
+            
+            child: Text(_SpeechScreenState.savedWords),
+          ),
+        )
+      );
+    }
+
+  }
