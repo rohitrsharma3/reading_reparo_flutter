@@ -136,70 +136,97 @@ class SecondRoute extends StatelessWidget {
           ),
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
-        body: Container(
-          padding: EdgeInsets.fromLTRB(0, 10, 0, 600),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  langID = 'en-US';
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => SpeechScreen())));
-                },
-                child: languageIcon.LanguageIcon('assets/english-icon.png'),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(45),
-                ))),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  langID = 'hi-IN';
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => SpeechScreen())));
-                },
-                child: languageIcon.LanguageIcon('assets/hindi-icon.png'),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
+        body: ListView(
+          children: [
+            Column(
+              children: [
+                Container(
+                  width: 150,
+                  height: 150,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          langID = 'en-IN';
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => SpeechScreen())));
+                        },
+                        child: languageIcon.LanguageIcon(
+                            'assets/english-icon.png'),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          langID = 'hi-IN';
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => SpeechScreen())));
+                        },
+                        child:
+                            languageIcon.LanguageIcon('assets/hindi-icon.png'),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          langID = 'ta-IN';
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => SpeechScreen())));
+                        },
+                        child:
+                            languageIcon.LanguageIcon('assets/tamil-icon.png'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    langID = 'ta-IN';
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => SpeechScreen())));
-                  },
-                  child: languageIcon.LanguageIcon('assets/tamil-icon.png'),
-                  style: ElevatedButton.styleFrom(shape: CircleBorder())),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  langID = 'te-IN';
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => SpeechScreen())));
-                },
-                child: languageIcon.LanguageIcon('assets/india-flag-icon.png'),
-                style: ElevatedButton.styleFrom(shape: CircleBorder()),
-              ),
-            ],
-          ),
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  width: 100,
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView(
+                    children: [
+                      ElevatedButton(onPressed: () {}, child: Text("Level 1")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 2")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 3")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 4")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 5")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 6")),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text("Level 7"))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
         ));
   }
 }
