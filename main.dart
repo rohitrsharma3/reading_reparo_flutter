@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -133,6 +134,16 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backgroundColor(),
+        bottomNavigationBar: Stack(
+          children: [
+            Container(
+              height: 50,
+            ),
+            Row(
+              children: [],
+            )
+          ],
+        ),
         appBar: AppBar(
           title: Text(
             "What would you like to read today?",
@@ -309,10 +320,17 @@ class _SpeechScreenState extends State<SpeechScreen> {
   double _confidence = 1.0;
   String langId = SecondRoute.langID;
   List<String> savedWords = [];
+  final Map<String, HighlightedWord> _highlights = {};
+
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
+    for (int i = 0; i < _text.split(" ").length; i++) {
+      _highlights[_text.split(" ")[i]] = HighlightedWord(
+          textStyle: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 32));
+    }
   }
 
   @override
@@ -331,17 +349,27 @@ class _SpeechScreenState extends State<SpeechScreen> {
           backgroundColor: Colors.black,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: _listen,
-          child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+        floatingActionButton: AvatarGlow(
+          animate: _isListening,
+          glowColor: Theme.of(context).primaryColor,
+          endRadius: 75.0,
+          duration: const Duration(microseconds: 2000),
+          repeatPauseDuration: const Duration(microseconds: 100),
+          child: FloatingActionButton(
+              onPressed: _listen,
+              child: Icon(_isListening ? Icons.mic : Icons.mic_none)),
         ),
         body: SingleChildScrollView(
           reverse: true,
           child: Container(
             padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
-            child: Text(
-              _text,
-              style: TextStyle(color: Colors.black),
+            child: TextHighlight(
+              text: _text,
+              words: _highlights,
+              textStyle: const TextStyle(
+                  fontSize: 32,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400),
             ),
           ),
         ));
