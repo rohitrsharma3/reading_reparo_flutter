@@ -5,6 +5,8 @@ import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:reading_reparo/languageButtonIcons.dart' as languageIcon;
+import 'package:reading_reparo/myColors.dart';
+import "package:reading_reparo/myStyles.dart";
 
 void main() {
   runApp(const MyApp());
@@ -62,10 +64,13 @@ class _FirstScreenState extends State<FirstScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.blue[100],
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor(),
       appBar: AppBar(
-        title: Text('Reading Reparo'),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        title: Text(
+          'Reading Reparo',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: backgroundColor(),
       ),
       body: Wrap(
         children: [
@@ -78,14 +83,14 @@ class _FirstScreenState extends State<FirstScreen>
                       TyperAnimatedText(
                         "Reading Reparo",
                         textStyle: TextStyle(
-                            fontSize: 30,
+                            fontSize: 36,
                             foreground: Paint()..shader = linearGradient,
                             fontFamily: "Jeju-Gothic",
                             fontWeight: FontWeight.bold),
                       ),
                       TyperAnimatedText("Let's Repair Our Reading",
                           textStyle: TextStyle(
-                              fontSize: 30,
+                              fontSize: 36,
                               foreground: Paint()..shader = linearGradient,
                               fontFamily: "Jeju-Gothic",
                               fontWeight: FontWeight.bold)),
@@ -121,12 +126,13 @@ class _FirstScreenState extends State<FirstScreen>
 
 class SecondRoute extends StatelessWidget {
   static late String langID;
+
   SecondRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor(),
         appBar: AppBar(
           title: Text(
             "What would you like to read today?",
@@ -141,89 +147,147 @@ class SecondRoute extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: 150,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  // width: MediaQuery.of(context).size.width,
                   height: 150,
                   child: ListView(
+                    // Horizontal ListView
                     scrollDirection: Axis.horizontal,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          langID = 'en-IN';
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => SpeechScreen())));
-                        },
-                        child: languageIcon.LanguageIcon(
-                            'assets/english-icon.png'),
-                      ),
+                          onPressed: () {
+                            langID = 'en-IN';
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          child: Text(
+                            "English",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                              fontFamily: 'Jeju-Gothic',
+                            ),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130)))),
                       SizedBox(
                         width: 20,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          langID = 'hi-IN';
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => SpeechScreen())));
-                        },
-                        child:
-                            languageIcon.LanguageIcon('assets/hindi-icon.png'),
-                      ),
+                          onPressed: () {
+                            langID = 'hi-IN';
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          child: Text(
+                            "Hindi",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                            ),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130)))),
                       SizedBox(
                         width: 20,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          langID = 'ta-IN';
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => SpeechScreen())));
-                        },
-                        child:
-                            languageIcon.LanguageIcon('assets/tamil-icon.png'),
-                      ),
+                          onPressed: () {
+                            langID = 'ta-IN';
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          child: Text(
+                            "Tamil",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                            ),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130)))),
                     ],
                   ),
                 ),
                 SizedBox(
+                  // seperator between two list view
                   height: 50,
                 ),
                 Container(
-                  width: 100,
-                  height: MediaQuery.of(context).size.height,
-                  child: ListView(
-                    children: [
-                      ElevatedButton(onPressed: () {}, child: Text("Level 1")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 2")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 3")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 4")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 5")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 6")),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text("Level 7"))
-                    ],
-                  ),
-                )
+                    child: Column(
+                  children: [
+                    Container(
+                      child: Text("Our Picks"),
+                      padding: EdgeInsets.only(right: 300),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        width: MediaQuery.of(context).size.width,
+                        height: 80,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                                child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text("Level 1 "),
+                              style: ButtonStyle(shape: myRoundedBorder(20)),
+                            )),
+                            SizedBox(width: 20),
+                            Container(
+                                child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("Level 1 "),
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20)))))),
+                            SizedBox(width: 20),
+                            Container(
+                                child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text("Level 1 "),
+                              style: ButtonStyle(shape: myRoundedBorder(20)),
+                            )),
+                            SizedBox(width: 20),
+                            Container(
+                                child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text("Level 1 "),
+                              style: ButtonStyle(shape: myRoundedBorder(20)),
+                            )),
+                            SizedBox(width: 20)
+                          ],
+                        ))
+                  ],
+                )),
+                Container(
+                    child: Column(
+                  children: [],
+                ))
               ],
             ),
           ],
@@ -254,7 +318,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor(),
         appBar: AppBar(
           title: Text(
             'Confidence : ${(_confidence * 100).toStringAsFixed(1)}' +
@@ -277,7 +341,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
             padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
             child: Text(
               _text,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
           ),
         ));
