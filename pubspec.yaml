@@ -41,6 +41,9 @@ dependencies:
   speech_to_text : ^5.6.0
   highlight_text : ^0.7.2
   avatar_glow : ^1.2.0
+  clipboard : ^0.1.3
+  animated_text_kit : ^4.2.2
+  country_icons : ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -65,9 +68,17 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+  - assets/logo_asset.png
+  #- assets/india-flag-icon.svg
+  - assets/united-kingdom-flag-icon.png
+  - assets/india-flag-icon.png
+  - assets/english-icon.png
+  - assets/hindi-icon.png
+  - assets/tamil-icon.png
+  #- assets/united-states-flag-icon.svg
+
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
