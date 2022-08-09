@@ -316,20 +316,26 @@ class SpeechScreen extends StatefulWidget {
 class _SpeechScreenState extends State<SpeechScreen> {
   stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
-  String _text = "Press the button to start speaking";
+  String _text = "press the button to start speaking";
+  late String _textConst;
   double _confidence = 1.0;
   String langId = SecondRoute.langID;
-  List<String> savedWords = [];
+  late List<String> savedWords;
   final Map<String, HighlightedWord> _highlights = {};
+
+  _SpeechScreenState() {
+    this._textConst = _text;
+  }
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
-    for (int i = 0; i < _text.split(" ").length; i++) {
-      _highlights[_text.split(" ")[i]] = HighlightedWord(
+    savedWords = _text.split(" ");
+    for (int i = 0; i < savedWords.length; i++) {
+      _highlights[savedWords[i]] = HighlightedWord(
           textStyle: const TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 32));
+              color: Colors.green, fontWeight: FontWeight.w400, fontSize: 32));
     }
   }
 
@@ -359,12 +365,18 @@ class _SpeechScreenState extends State<SpeechScreen> {
               onPressed: _listen,
               child: Icon(_isListening ? Icons.mic : Icons.mic_none)),
         ),
-        body: SingleChildScrollView(
-          reverse: true,
-          child: Container(
+        body: ListView(reverse: false, children: [
+          Container(
+            child: Text(_textConst,
+                style: const TextStyle(
+                    fontSize: 32,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400)),
+          ),
+          Container(
             padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
             child: TextHighlight(
-              text: _text,
+              text: _isListening == false ? "" : _text,
               words: _highlights,
               textStyle: const TextStyle(
                   fontSize: 32,
@@ -372,8 +384,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-        ));
-    print(savedWords);
+        ]));
   }
 
   void _listen() async {
@@ -387,6 +398,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         _speech.listen(
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
+
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }
