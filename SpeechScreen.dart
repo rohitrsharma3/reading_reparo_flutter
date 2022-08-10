@@ -17,7 +17,7 @@ class SpeechScreen extends StatefulWidget {
 class _SpeechScreenState extends State<SpeechScreen> {
   stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
-  String _text = "press the button to start speaking";
+  String _text = "press the button to start";
   late String _textConst;
   double _confidence = 1.0;
   String langId = SecondRoute.langID;
@@ -43,49 +43,63 @@ class _SpeechScreenState extends State<SpeechScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backgroundColor(),
-        appBar: AppBar(
-          title: Text(
-            'Confidence : ${(_confidence * 100).toStringAsFixed(1)}' +
-                '    ' +
-                SecondRoute.langID,
-            style: TextStyle(
-              fontSize: 15,
-            ),
+      backgroundColor: backgroundColor(),
+      appBar: AppBar(
+        title: Text(
+          'Confidence : ${(_confidence * 100).toStringAsFixed(1)}' +
+              '    ' +
+              SecondRoute.langID,
+          style: TextStyle(
+            fontSize: 15,
           ),
-          backgroundColor: Colors.black,
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: AvatarGlow(
-          animate: _isListening,
-          glowColor: Colors.purple.shade900,
-          endRadius: 75.0,
-          duration: const Duration(microseconds: 2000),
-          repeatPauseDuration: const Duration(microseconds: 100),
-          child: FloatingActionButton(
-              onPressed: _listen,
-              child: Icon(_isListening ? Icons.mic : Icons.mic_none)),
-        ),
-        body: ListView(reverse: false, children: [
-          Container(
-            child: Text(_textConst,
-                style: const TextStyle(
-                    fontSize: 32,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400)),
+        backgroundColor: Colors.black,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: AvatarGlow(
+        animate: _isListening,
+        glowColor: Colors.purple.shade900,
+        endRadius: 75.0,
+        duration: const Duration(microseconds: 2000),
+        repeatPauseDuration: const Duration(microseconds: 100),
+        child: FloatingActionButton(
+            onPressed: _listen,
+            child: Icon(_isListening ? Icons.mic : Icons.mic_none)),
+      ),
+      body: Center(
+          child: ListView(reverse: false, children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(top: 50),
+          child: Column(
+            children: [
+              Icon(
+                Icons.book_rounded,
+                size: 200,
+              ),
+              Text("Book Title")
+            ],
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
-            child: TextHighlight(
-              text: _isListening == false ? "" : _text,
-              words: _highlights,
-              textStyle: const TextStyle(
+        ),
+        Container(
+          child: Text(_textConst,
+              style: const TextStyle(
                   fontSize: 32,
                   color: Colors.black,
-                  fontWeight: FontWeight.w400),
-            ),
+                  fontWeight: FontWeight.w400)),
+        ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
+          child: TextHighlight(
+            text: _isListening == false ? "" : _text,
+            words: _highlights,
+            textStyle: const TextStyle(
+                fontSize: 32, color: Colors.black, fontWeight: FontWeight.w400),
           ),
-        ]));
+        ),
+      ])),
+    );
   }
 
   void _listen() async {

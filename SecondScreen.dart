@@ -135,23 +135,38 @@ class SecondRoute extends StatelessWidget {
                     Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         width: MediaQuery.of(context).size.width,
-                        height: 80,
+                        height: 150,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
-                                height: 200,
-                                width: 100,
+                                //height: 200,
+                                width: 150,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    langID = 'en-IN';
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                SpeechScreen())));
+                                  },
                                   child: Text("Level 1 "),
                                   style:
                                       ButtonStyle(shape: myRoundedBorder(20)),
                                 )),
                             SizedBox(width: 20),
                             Container(
+                                width: 150,
                                 child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      langID = 'en-IN';
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: ((context) =>
+                                                  SpeechScreen())));
+                                    },
                                     child: Text("Level 1 "),
                                     style: ButtonStyle(
                                         shape: MaterialStateProperty.all(
@@ -161,26 +176,104 @@ class SecondRoute extends StatelessWidget {
                                                         20)))))),
                             SizedBox(width: 20),
                             Container(
+                                width: 150,
                                 child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text("Level 1 "),
-                              style: ButtonStyle(shape: myRoundedBorder(20)),
-                            )),
+                                  onPressed: () {
+                                    langID = 'en-IN';
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                SpeechScreen())));
+                                  },
+                                  child: Text("Level 1 "),
+                                  style:
+                                      ButtonStyle(shape: myRoundedBorder(20)),
+                                )),
                             SizedBox(width: 20),
                             Container(
+                                width: 150,
                                 child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text("Level 1 "),
-                              style: ButtonStyle(shape: myRoundedBorder(20)),
-                            )),
+                                  onPressed: () {
+                                    langID = 'en-IN';
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                SpeechScreen())));
+                                  },
+                                  child: Text("Level 1 "),
+                                  style:
+                                      ButtonStyle(shape: myRoundedBorder(20)),
+                                )),
                             SizedBox(width: 20)
                           ],
                         ))
                   ],
                 )),
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                ), // Seperator between list views
                 Container(
                     child: Column(
-                  children: [],
+                  children: [
+                    Container(
+                      child: Text("Reading Plans"),
+                      padding: EdgeInsets.only(right: 300),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        width: MediaQuery.of(context).size.width,
+                        height: 150,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                                width: 150,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text("Class 1 "),
+                                  style:
+                                      ButtonStyle(shape: myRoundedBorder(20)),
+                                )),
+                            SizedBox(width: 20),
+                            Container(
+                                width: 150,
+                                child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text("Class 2 "),
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20)))))),
+                            SizedBox(width: 20),
+                            Container(
+                                width: 150,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text("Class 3 "),
+                                  style:
+                                      ButtonStyle(shape: myRoundedBorder(20)),
+                                )),
+                            SizedBox(width: 20),
+                            Container(
+                                width: 150,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text("Class 4 "),
+                                  style:
+                                      ButtonStyle(shape: myRoundedBorder(20)),
+                                )),
+                            SizedBox(width: 20)
+                          ],
+                        ))
+                  ],
                 ))
               ],
             ),
