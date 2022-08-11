@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:reading_reparo/FirstScreen.dart';
 import 'main.dart';
 import 'SpeechScreen.dart';
 import 'myColors.dart';
 import 'myStyles.dart';
+import "data/languages.dart";
+import "data/ourPicks.dart";
+import "data/readingPlans.dart";
+import 'data/bookData.dart';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
 
 class SecondRoute extends StatelessWidget {
   static late String langID;
+  static late String bookTitle;
+  static late String coverPath;
+  static late String bookDesc;
+  static late String bookTextPath;
+  static var bookContent;
+  static String contentLimit = "";
 
   SecondRoute({Key? key}) : super(key: key);
 
@@ -34,249 +47,162 @@ class SecondRoute extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  // width: MediaQuery.of(context).size.width,
-                  height: 150,
-                  child: ListView(
-                    // Horizontal ListView
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          langID = 'en-IN';
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => SpeechScreen())));
-                        },
-                        child: Text(
-                          "English",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28,
-                            fontFamily: 'Jeju-Gothic',
-                          ),
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.blue[800]),
-                            shape: myRoundedBorder(20),
-                            fixedSize:
-                                MaterialStateProperty.all(Size(240, 130))),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            langID = 'hi-IN';
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => SpeechScreen())));
-                          },
-                          child: Text(
-                            "Hindi",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28,
-                            ),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.blue[800]),
-                              shape: myRoundedBorder(20),
-                              fixedSize:
-                                  MaterialStateProperty.all(Size(240, 130)))),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            langID = 'ta-IN';
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) => SpeechScreen())));
-                          },
-                          child: Text(
-                            "Tamil",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28,
-                            ),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.blue[800]),
-                              shape: myRoundedBorder(20),
-                              fixedSize:
-                                  MaterialStateProperty.all(Size(240, 130)))),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  // seperator between two list view
-                  height: 50,
-                ),
-                Container(
-                    child: Column(
-                  children: [
-                    Container(
-                      child: Text("Our Picks"),
-                      padding: EdgeInsets.only(right: 300),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        width: MediaQuery.of(context).size.width,
-                        height: 150,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                                //height: 200,
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    langID = 'en-IN';
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) =>
-                                                SpeechScreen())));
-                                  },
-                                  child: Text("Level 1 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      langID = 'en-IN';
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  SpeechScreen())));
-                                    },
-                                    child: Text("Level 1 "),
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        20)))))),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    langID = 'en-IN';
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) =>
-                                                SpeechScreen())));
-                                  },
-                                  child: Text("Level 1 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    langID = 'en-IN';
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) =>
-                                                SpeechScreen())));
-                                  },
-                                  child: Text("Level 1 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20)
-                          ],
-                        ))
-                  ],
-                )),
-                SizedBox(
-                  width: 50,
-                  height: 50,
-                ), // Seperator between list views
-                Container(
-                    child: Column(
-                  children: [
-                    Container(
-                      child: Text("Reading Plans"),
-                      padding: EdgeInsets.only(right: 300),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        width: MediaQuery.of(context).size.width,
-                        height: 150,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text("Class 1 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                    onPressed: () {},
-                                    child: Text("Class 2 "),
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        20)))))),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text("Class 3 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20),
-                            Container(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text("Class 4 "),
-                                  style:
-                                      ButtonStyle(shape: myRoundedBorder(20)),
-                                )),
-                            SizedBox(width: 20)
-                          ],
-                        ))
-                  ],
-                ))
-              ],
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "What language do you wantt to learn in?",
+                style: TextStyle(
+                    fontFamily: 'Jeju-Gothic',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
+            Container(
+                height: 170,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: languages.length,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            langID = languages.values.elementAt(index);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          child: Text(
+                            languages.keys.elementAt(index),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                              fontFamily: 'Jeju-Gothic',
+                            ),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130))),
+                        ));
+                  }),
+                )),
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: Text("Our Picks",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
+                    fontFamily: 'Jeju-Gothic',
+                  )),
+            ),
+            Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: ourPicks.length,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                        padding: EdgeInsets.all(10),
+                        child: IconButton(
+                          onPressed: () async {
+                            langID = bookData.values.elementAt(index)[1];
+                            bookTitle = bookData.keys.elementAt(index);
+                            coverPath = bookData.values.elementAt(index)[2];
+                            bookDesc = bookData.values.elementAt(index)[3];
+                            bookTextPath = bookData.values.elementAt(index)[4];
+                            bookContent =
+                                await rootBundle.loadString(bookTextPath);
+
+                            for (int i = 0; i < 30; i++) {
+                              contentLimit = contentLimit +
+                                  " " +
+                                  bookContent.split(" ")[i];
+                            }
+                            langID = bookData.values.elementAt(index)[0];
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          icon: Image(
+                              image: AssetImage(
+                                  bookData.values.elementAt(index)[2])),
+                          iconSize:
+                              200 /*Text(
+                            bookData.keys.elementAt(index),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                              fontFamily: 'Jeju-Gothic',
+                            ),
+                          ),*/
+                          ,
+                          /*style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130))),*/
+                        ));
+                  }),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                "Reading Plans",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
+                    fontFamily: 'Jeju-Gothic'),
+              ),
+            ),
+            Container(
+                height: 170,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: readingPlans.length,
+                  itemBuilder: ((context, index) {
+                    return Container(
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            langID = 'en-US';
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // TODO Update navigation route to Reading Plan Screen
+                                    builder: ((context) => SpeechScreen())));
+                          },
+                          child: Text(
+                            readingPlans[index],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                              fontFamily: 'Jeju-Gothic',
+                            ),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue[800]),
+                              shape: myRoundedBorder(20),
+                              fixedSize:
+                                  MaterialStateProperty.all(Size(240, 130))),
+                        ));
+                  }),
+                ))
           ],
         ));
   }

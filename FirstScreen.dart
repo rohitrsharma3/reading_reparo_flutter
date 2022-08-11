@@ -17,9 +17,7 @@ class _FirstScreenState extends State<FirstScreen>
   final Shader linearGradient = LinearGradient(colors: <Color>[
     Color.fromARGB(255, 42, 69, 225),
     Color.fromARGB(255, 119, 72, 212)
-  ]
-      //colors: <Color>[Color.fromARGB(255, 28, 52, 185), Color.fromARGB(255, 168, 148, 209)],
-      ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+  ]).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   late final AnimationController _controller =
       AnimationController(duration: const Duration(seconds: 2), vsync: this)
